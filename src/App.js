@@ -4,17 +4,36 @@ import Navbar from './components/Navbar';
 import RoutesPath from './components/RoutesPath';
 import Footer from './components/Footer';
 import { Toaster } from 'react-hot-toast';
+import AdminNavbar from './components/Admin/AdminNavbar';
+import { useEffect } from 'react';
 
 
 function App() {
+
+  
+ 
   return (
     <>
     <div >
     <Toaster   position="bottom-right" />
-      <BrowserRouter>
-        <Navbar/>
+    <BrowserRouter>
+
+        { localStorage.getItem('isAdmin') ? <></>:
+         <Navbar/>}
+
+
         <RoutesPath/>
-        <Footer/>
+
+        { localStorage.getItem('isAdmin') ? <></>:
+         <Footer/>}
+       
+    
+
+     
+ 
+
+  
+
 
       </BrowserRouter>
       
