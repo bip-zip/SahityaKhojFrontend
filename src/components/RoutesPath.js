@@ -5,9 +5,10 @@ import AdminPublication from './Admin/PublicationStuff/AdminPublication'
 import Login from './Authentication/Login'
 import PublicationRequest from './Authentication/PublicationRequest'
 import Register from './Authentication/Register'
+import AddFeed from './Feeds/AddFeed'
 import FeedHome from './Feeds/FeedHome'
-import FrontPage from './FrontPage/FrontPage'
-import Results from './FrontPage/Results'
+import FrontPage from './Frontpage/FrontPage'
+import Results from './Frontpage/Results'
 import Portfolio from './Portfolio/Portfolio'
 import AddBook from './Publication/AddBook'
 import AddedBooks from './Publication/AddedBooks'
@@ -32,6 +33,9 @@ function RoutesPath() {
             <Route path="/all-books" element={<AllBooks/>} ></Route>
             <Route path="/added-books" element={<AddedBooks/>} ></Route>
             <Route path="/publication-request" element={<PublicationRequest/>} ></Route>
+            <Route path="/add-feed" element={<AddFeed/>} ></Route>
+
+
 
 
 

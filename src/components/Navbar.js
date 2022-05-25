@@ -36,6 +36,8 @@ export default function Navbar() {
                             <li><Link className="dropdown-item" to="/add-books">Add book</Link></li>
                             <li><Link className="dropdown-item" to="/added-books">Added books</Link></li>
                             <li><Link className="dropdown-item" to="/all-books">All books</Link></li>
+                            <hr/>
+                            <li><Link className="dropdown-item" to="/add-feed">Add post</Link></li>
                             <li><div className="dropdown-item" onClick={userLogout} >Logout</div></li>
 
                         </ul>

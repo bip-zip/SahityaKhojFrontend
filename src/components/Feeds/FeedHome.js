@@ -1,8 +1,27 @@
-import React from 'react'
 import SingleAd from './SingleAd'
 import SinglePost from './SinglePost'
-
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import axios from "axios"
 function FeedHome() {
+
+  const [feeds, setFeeds] = useState([])
+  const getFeeds = async () => {
+    const feedsFromServer = await fetchFeeds()
+    setFeeds(feedsFromServer.data)
+  }
+  useEffect(() => {
+    
+    getFeeds()
+  }, [])
+
+  // Fetch Books
+  const fetchFeeds = async () => {
+    const res = await axios.get('http://localhost:8080/api/feeds')
+    return res.data
+  }
+
+
   return (
     <>
     <div className='container mt-2 mx-auto '>
@@ -10,9 +29,11 @@ function FeedHome() {
        
         <div className='row '>
           <div className='col-lg-8 p-3  '>
-            <SinglePost/>
-            <SinglePost/>
-            <SinglePost/>
+          {feeds.map((feed, index) => (
+                <SinglePost key={index} feed={feed} getFeeds={getFeeds} />
+
+              ))}
+          
 
           </div>
           <div className='col pe-0 pt-3'>
