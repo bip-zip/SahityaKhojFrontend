@@ -2,13 +2,19 @@ import React from 'react'
 import {Routes, Route} from 'react-router-dom'
 import AdminDashboard from './Admin/AdminDashboard'
 import AdminPublication from './Admin/PublicationStuff/AdminPublication'
+import AdminWriter from './Admin/WriterStuff/AdminWriter'
 import Login from './Authentication/Login'
 import PublicationRequest from './Authentication/PublicationRequest'
 import Register from './Authentication/Register'
+import WriterRequest from './Authentication/WriterRequest'
+import AddFeed from './Feeds/AddFeed'
+import EditFeed from './Feeds/EditFeed'
 import FeedHome from './Feeds/FeedHome'
 import FrontPage from './FrontPage/FrontPage'
 import Results from './FrontPage/Results'
 import Portfolio from './Portfolio/Portfolio'
+import UpdatePortfolio from './Portfolio/UpdatePortfolio'
+import Profile from './Profile/Profile'
 import AddBook from './Publication/AddBook'
 import AddedBooks from './Publication/AddedBooks'
 import AllBooks from './Publication/AllBooks'
@@ -32,8 +38,11 @@ function RoutesPath() {
             <Route path="/all-books" element={<AllBooks/>} ></Route>
             <Route path="/added-books" element={<AddedBooks/>} ></Route>
             <Route path="/publication-request" element={<PublicationRequest/>} ></Route>
-
-
+            <Route path="/add-feed" element={<AddFeed/>} ></Route>
+            <Route path="/edit-feed/:feedId" element={<EditFeed/>} ></Route>
+            <Route path="/profile" element={<Profile/>} ></Route>
+            <Route path="/writer-request" element={<WriterRequest/>} ></Route>
+            <Route path="/update-portfolio" element={<UpdatePortfolio/>} ></Route>
 
 
            {localStorage.getItem('isAdmin')? 
@@ -54,6 +63,7 @@ function RoutesPath() {
            
            }
             <Route path="/admin/publications" element={<AdminPublication/>} ></Route>
+            <Route path="/admin/writers" element={<AdminWriter/>} ></Route>
         </Routes>
 
 

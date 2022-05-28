@@ -38,8 +38,8 @@ function AdminNavbar() {
             </li>
             <li>
               <Link
-                to="#submenu2"
-                data-bs-toggle="collapse"
+                to="/admin/writers"
+                
                 className="nav-link px-0 align-middle "
               >
                 <i className="fs-4 bi-bootstrap" />{" "}

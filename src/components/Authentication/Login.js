@@ -22,11 +22,11 @@ function Login() {
         axios.post("http://localhost:8080/api/users/login", userData).then(
             result=>{
                 if(result.data.token){
-                    console.log(result)
                     toast.success('Login success')
                     localStorage.setItem('token',result.data.token)
                     localStorage.setItem('penname',result.data.penname)
                     localStorage.setItem('_id',result.data.uid)
+                    console.log(localStorage.getItem('token'))
                     // localStorage.setItem('pp',result.data.pp)
                     
                     if(result.data.isAdmin){
@@ -41,8 +41,14 @@ function Login() {
                         toast.success('Logged in as Publisher')
 
                     }
+                    else if(result.data.isWriter){
+                        localStorage.setItem('isWriter',true)
+                        window.location.href='/portfolio'
+                        toast.success('Logged in as a Writer')
+
+                    }
                     else{
-                        navigate('/portfolio')
+                        navigate('/profile')
                     }
                
                     

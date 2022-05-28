@@ -33,9 +33,13 @@ export default function Navbar() {
                         <i className='fa fa-user-circle'></i>    {localStorage.getItem("penname")}
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                            <li><Link className="dropdown-item" to="/writer-request">Request writer</Link></li>
                             <li><Link className="dropdown-item" to="/add-books">Add book</Link></li>
                             <li><Link className="dropdown-item" to="/added-books">Added books</Link></li>
                             <li><Link className="dropdown-item" to="/all-books">All books</Link></li>
+                            <hr/>
+                            <li><Link className="dropdown-item" to="/add-feed">Add post</Link></li>
                             <li><div className="dropdown-item" onClick={userLogout} >Logout</div></li>
 
                         </ul>
