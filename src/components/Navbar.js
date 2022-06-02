@@ -34,12 +34,17 @@ export default function Navbar() {
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                            <li><Link className="dropdown-item" to="/portfolio">Portfolio</Link></li>
+                            <li><Link className="dropdown-item" to="/publication">Publication Portfolio</Link></li>
                             <li><Link className="dropdown-item" to="/writer-request">Request writer</Link></li>
                             <li><Link className="dropdown-item" to="/add-books">Add book</Link></li>
                             <li><Link className="dropdown-item" to="/added-books">Added books</Link></li>
                             <li><Link className="dropdown-item" to="/all-books">All books</Link></li>
                             <hr/>
+                            <li><Link className="dropdown-item" to="/add-releasing">Add releasing</Link></li>
+                            
                             <li><Link className="dropdown-item" to="/add-feed">Add post</Link></li>
+                            <li><Link className="dropdown-item" to="/request-ads">Request Ads</Link></li>
                             <li><div className="dropdown-item" onClick={userLogout} >Logout</div></li>
 
                         </ul>

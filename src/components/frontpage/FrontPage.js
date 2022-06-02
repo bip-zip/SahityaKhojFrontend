@@ -21,6 +21,7 @@ function FrontPage() {
             navigate('/results/' + keyword)
         }
     };
+    
 
       
 
@@ -34,7 +35,7 @@ function FrontPage() {
             </div>
             <form >
                 <div className='mx-auto col-lg-5' >
-                    <input type="text" required onChange={(e) => setKeyword(e.target.value)}  className="form-control fs-5 " placeholder="Book hints..." />
+                    <input id="input" type="text" required onChange={(e) => setKeyword(e.target.value)}  className="form-control fs-5 " placeholder="Book hints..." />
                 </div>
                 <div className='d-flex justify-content-center mx-auto my-4' >
                     <button type="button" onClick={onFormSubmit} className="btn btn-danger col-lg-2 fs-5 ">

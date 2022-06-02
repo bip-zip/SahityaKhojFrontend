@@ -1,19 +1,29 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import AdComponent from '../Ads/AdComponent'
 import BooksAwards from '../Portfolio/BooksAwards'
+import SingleRelease from '../Releasing/SingleRelease'
 import PublicationInfo from './PublicationInfo'
 
 
 function PublicationPortfolio() {
 
     const [books, setBooks] = useState([])
+  const [releases, setRelease] = useState([])
+
+  const getRelease = async () => {
+    const releaseFromServer = await fetchRelease()
+    setRelease(releaseFromServer.data)
+  }
+  const getBooks = async () => {
+    const booksFromServer = await fetchBooks()
+    setBooks(booksFromServer.data)
+  }
 
     useEffect(() => {
-      const getBooks = async () => {
-        const booksFromServer = await fetchBooks()
-        setBooks(booksFromServer.data)
-      }
+      
       getBooks()
+      getRelease()
     }, [])
   
     const config = {
@@ -27,6 +37,11 @@ function PublicationPortfolio() {
       const res = await axios.get('http://localhost:8080/api/books/added-books/'+ localStorage.getItem("_id"),config)
       return res.data
     }
+      // Fetch Release
+  const fetchRelease = async () => {
+    const res = await axios.get('http://localhost:8080/api/books/ind-release/'+localStorage.getItem("_id"),config)
+    return res.data
+  }
   
 
 
@@ -38,7 +53,7 @@ function PublicationPortfolio() {
           <div className="container col-md-12">
             <div className="row">
               <div className="col-md-8 px-0">
-                <div className="py-1 my-2 px-0 ms-0 me-1 bg-white">
+                <div className="py-1 my-2 px-0 ms-0 me-1 ">
                   <div className="d-flex justify-content-between align-items-center">
                     {awardDiv ? (
                       <div className="p-2">
@@ -90,13 +105,24 @@ function PublicationPortfolio() {
                   </div>
                   {adsDiv ? (
                     <div className="p-2">
-                       <p>Ads here</p>
+               
+      <div className=' p-3  '>
+      {releases.map((release, index) => (
+            <SingleRelease key={index} release={release} getRelease={getRelease} />
+
+          ))}
+      
+
+      </div>
+     
+                       
+
                      
                     </div>
                   ) : null}
                   {awardDiv ? (
                     <>
-                    <div className="row p-1">
+                    <div className="row p-1 mx-2">
                     {books.map((book, index) => (
                 <BooksAwards key={index} book={book} />
 

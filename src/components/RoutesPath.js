@@ -3,6 +3,7 @@ import {Routes, Route} from 'react-router-dom'
 import AdminDashboard from './Admin/AdminDashboard'
 import AdminPublication from './Admin/PublicationStuff/AdminPublication'
 import AdminWriter from './Admin/WriterStuff/AdminWriter'
+import RequestAd from './Ads/RequestAd'
 import Login from './Authentication/Login'
 import PublicationRequest from './Authentication/PublicationRequest'
 import Register from './Authentication/Register'
@@ -19,6 +20,7 @@ import AddBook from './Publication/AddBook'
 import AddedBooks from './Publication/AddedBooks'
 import AllBooks from './Publication/AllBooks'
 import PublicationPortfolio from './Publication/PublicationPortfolio'
+import AddReleasing from './Releasing/AddReleasing'
 import ReleaseHome from './Releasing/ReleaseHome'
 
 
@@ -43,6 +45,8 @@ function RoutesPath() {
             <Route path="/profile" element={<Profile/>} ></Route>
             <Route path="/writer-request" element={<WriterRequest/>} ></Route>
             <Route path="/update-portfolio" element={<UpdatePortfolio/>} ></Route>
+            <Route path="/add-releasing" element={<AddReleasing/>} ></Route>
+            <Route path="/request-ads" element={<RequestAd/>} ></Route>
 
 
            {localStorage.getItem('isAdmin')? 

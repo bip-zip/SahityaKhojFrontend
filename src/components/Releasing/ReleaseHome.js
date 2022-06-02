@@ -1,10 +1,56 @@
-import React from 'react'
+
+import SingleRelease from './SingleRelease'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import AdComponent from '../Ads/AdComponent'
+
 
 function ReleaseHome() {
+  const [releases, setRelease] = useState([])
+  const getRelease = async () => {
+    const releaseFromServer = await fetchRelease()
+    setRelease(releaseFromServer.data)
+  }
+  useEffect(() => {
+    
+    getRelease()
+  }, [])
+
+  // Fetch Release
+  const fetchRelease = async () => {
+    const res = await axios.get('http://localhost:8080/api/books/releases')
+    return res.data
+  }
+  
+
+
+
+
+
+
   return (
-    <div>
-      <h3 className='text-center my-3'>Recent Releasing..</h3>
+    <div className='container mt-2 mx-auto '>
+    {/* <h3 className='text-center'>Sahitya Khoj Feeds</h3> */}
+   
+    <div className='row '>
+      <div className='col-lg-8 p-3  '>
+      {releases.map((release, index) => (
+            <SingleRelease key={index} release={release} getRelease={getRelease} />
+
+          ))}
+      
+
+      </div>
+      <div className='col pe-0 pt-3'>
+        <AdComponent/>
+   
+      
+
+      </div>
+       
+
     </div>
+</div>
   )
 }
 

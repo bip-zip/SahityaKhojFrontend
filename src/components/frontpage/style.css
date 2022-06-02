@@ -1,40 +1,62 @@
-.frontpage{
-    background-color: rgb(214, 195, 231);
+.frontpage {
+  background-color: rgb(214, 195, 231);
 }
 
-.logoimage{
-    height: 9em;
+.logoimage {
+  height: 9em;
 }
-.bookimage{
-    height: 11em;
+.bookimage {
+  height: 11em;
 }
-.bg-purple{
-    background-color: #0E0236;
+.bg-purple {
+  background-color: #0e0236;
 }
-.btn-purple{
-    background-color: #0E0236;
+.btn-purple {
+  background-color: #0e0236;
 }
-.text-purple{
-    color: #0E0236;
+.text-purple {
+  color: #0e0236;
 }
 
-
-a.active_class{
-    color: red;
-    border-bottom: 1px solid red;}
-
-
-footer{
-    /* position: absolute; */
-    /* position: -webkit-fixed; */
-    /* bottom: 0; */
+a.active_class {
+  color: red;
+  border-bottom: 1px solid red;
 }
-.text-danger{
-    color: #EB5455 !important;
+
+footer {
+  /* position: absolute; */
+  /* position: -webkit-fixed; */
+  /* bottom: 0; */
 }
-.btn-danger{
-    background: #EB5455 !important;
+.text-danger {
+  color: #eb5455 !important;
 }
-.btn-outline-danger{
-    border: 1px solid #EB5455 !important;
+.btn-danger {
+  background: #eb5455 !important;
+}
+.btn-outline-danger {
+  border: 1px solid #eb5455 !important;
+}
+
+.book {
+  position: relative;
+}
+.overlapImg {
+  position: absolute;
+
+  top: 7.1%;
+
+  bottom: 0;
+
+  left: 10%;
+
+  right: 0;
+
+  transform: perspective(550px) rotateY(-48deg);
+
+  max-height: 23.5vh;
+
+  opacity: 0.87;
+
+  width: 70%;
 }
