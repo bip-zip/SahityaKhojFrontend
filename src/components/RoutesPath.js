@@ -6,6 +6,7 @@ import Login from './Authentication/Login'
 import PublicationRequest from './Authentication/PublicationRequest'
 import Register from './Authentication/Register'
 import AddFeed from './Feeds/AddFeed'
+import EditFeed from './Feeds/EditFeed'
 import FeedHome from './Feeds/FeedHome'
 import FrontPage from './Frontpage/FrontPage'
 import Results from './Frontpage/Results'
@@ -34,7 +35,7 @@ function RoutesPath() {
             <Route path="/added-books" element={<AddedBooks/>} ></Route>
             <Route path="/publication-request" element={<PublicationRequest/>} ></Route>
             <Route path="/add-feed" element={<AddFeed/>} ></Route>
-
+            <Route path="/edit-feed/:feedId" element={<EditFeed/>} ></Route>
 
 
 

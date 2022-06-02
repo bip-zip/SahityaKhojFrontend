@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import toast from 'react-hot-toast';
+import EditFeed from "./EditFeed";
 
 
 function SinglePost({feed,getFeeds}) {
@@ -79,16 +80,16 @@ const unlikeClick = (feedId) => {
             {feed.user.penname}{" "}
             <i className="fa fa-circle-check fs-6 text-success"></i>{" "}
           </span>
-          {/* {(feed.user._id == userId) ? (
+          {(feed.user._id == userId) ? (
                         <div className='btn-group col-lg-4 me-auto'>
                             <button className='btn btn-outline-danger btn-sm' ><i className='fa fa-trash'></i></button>
                             <Link className='btn btn-primary btn-sm mx-1' to={'/edit-feed/' + feed._id}>Update</Link>
-                            <button className='btn btn-primary btn-sm mx-1' onClick={()=>{<EditFeed feed={feed}/>}}>Update</button>
+                            {/* <button className='btn btn-primary btn-sm mx-1' onClick={()=>{<EditFeed feed={feed}/>}}>Update</button> */}
 
                         </div>
                     ) : (
                         <></>
-                    )} */}
+                    )}
           <br />
           <span>
             <small className="fa fa-clock ms-3 text-secondary"></small>{" "}
