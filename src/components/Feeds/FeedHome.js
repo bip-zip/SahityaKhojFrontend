@@ -32,7 +32,7 @@ function FeedHome() {
   }
   // Fetch Ads
   const fetchAds = async () => {
-    const res = await axios.get('http://localhost:8080/api/ads')
+    const res = await axios.get('http://localhost:8080/api/ads/verified-ads')
     return res.data
   }
 

@@ -142,13 +142,40 @@ const unlikeClick = (feedId) => {
                           {dateFormat(release.date, "dS mmmm , yyyy")}
                           </small>
                         </div>
-                        <div className="d-flex justify-content-start align-items-center">
-                          <i className="fa fa-book me-1 text-secondary text-bold"></i>
-                          <small className="text text-dark mb-0">
-                          {release.bookName}{" "}
-            <small>({release.category})</small>
-                          </small>
-                        </div>
+                       
+                         
+                            <div className="col-md-12">
+                              <div className="p-1 text-center">
+                                <img
+                                  src={"http://localhost:8080/" + release.bookCover}
+                                  alt="image"
+                                  height={200}
+                                  // style={{
+                                  //   width: "80%",
+                                  //   height: "auto",
+                                  //   // objectFit: "cover",
+                                  //   // borderRadius: "50%",
+                                  // }}
+                                />
+                                <div className=" text-center  py-3">
+                                  <p className="text text-dark fw-bold mb-0 fs-6">
+                                    Book Title
+                                  </p>
+                                  <p className="text text-secondary mb-0">
+                                    Bhakat bahadur Thapa
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="p-1 text-center  bg-purple">
+                                <p className="text text-white mb-1 ">
+                                  Releasing On:
+                                </p>
+                                <p className="text text-white fw-bold fs-5">
+                                {dateFormat(release.releasingDate, "dS mmmm , yyyy")}
+                                </p>
+                              </div>
+                            </div>
+                            
                       </div>
                       <hr />
                       <div className="" style={{ maxWidth: "300px" }}>

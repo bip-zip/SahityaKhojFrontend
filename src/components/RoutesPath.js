@@ -1,6 +1,7 @@
 import React from 'react'
 import {Routes, Route} from 'react-router-dom'
 import AdminDashboard from './Admin/AdminDashboard'
+import AdsRow from './Admin/AdsStuff/AdsRow'
 import AdminPublication from './Admin/PublicationStuff/AdminPublication'
 import AdminWriter from './Admin/WriterStuff/AdminWriter'
 import RequestAd from './Ads/RequestAd'
@@ -68,6 +69,7 @@ function RoutesPath() {
            }
             <Route path="/admin/publications" element={<AdminPublication/>} ></Route>
             <Route path="/admin/writers" element={<AdminWriter/>} ></Route>
+            <Route path="/admin/ads" element={<AdsRow/>} ></Route>
         </Routes>
 
 
