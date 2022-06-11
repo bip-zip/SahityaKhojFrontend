@@ -5,18 +5,17 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import toast from 'react-hot-toast';
-import EditFeed from "../Feeds/EditFeed";
-
-
+// import EditFeed from "../Feeds/EditFeed";
+import LikeCommentShare from './LikeCommentShare';
 
 function SingleRelease({release,getRelease}) {
   const userId = localStorage.getItem('_id')
   let navigate = useNavigate();
   const[show, setShow] = useState(false)
   const[ishow, setIshow] = useState(true)
+  const [commentText, setCommentText] = useState('')
 
-  // const [likes, setLikes] = useState([release.Likes]);
-  // console.log("likes",likes)
+
   console.log(release.Likes)
   const [likecount, setLikecount] = useState(release.Likes.length);
 
@@ -27,13 +26,13 @@ function SingleRelease({release,getRelease}) {
 }
 
  // post like
- const likeClick = (feedId) => {
+ const likeClick = (bookId) => {
   const data = {
-      feedId
+      bookId
   }
-  axios.put('http://localhost:8080/api/feeds/like', data, config).then(result => {
+  axios.put('http://localhost:8080/api/books/release/like', data, config).then(result => {
       if (result.data.success) {
-          toast.success("Post liked", { position: 'bottom-right' })
+          toast.success("Blessing added", { position: 'bottom-right' })
           setLikecount(result.data.likecount)
           getRelease();
 
@@ -45,12 +44,11 @@ function SingleRelease({release,getRelease}) {
 }
 
 // post unlike
-const unlikeClick = (feedId) => {
-
+const unlikeClick = (bookId) => {
   const data = {
-      feedId
+      bookId
   }
-  axios.put('http://localhost:8080/api/feeds/unlike', data, config).then(result => {
+  axios.put('http://localhost:8080/api/books/release/unlike', data, config).then(result => {
       if (result.data.success) {
           setLikecount(result.data.likecount)
           getRelease();
@@ -60,13 +58,47 @@ const unlikeClick = (feedId) => {
 
       }
   })
+}
+
+const commentPost = (e) => {
+  e.preventDefault();
+
+  if (commentText == '') {
+      toast.error("write something..", { "position": "top-left" })
+      return
+  }
+  
+  const releaseId = release._id
+
+  const data = {
+    releaseId,
+      commentText
+  }
+
+  axios.post("http://localhost:8080/api/books/comment", data, config).then((res) => {
+      console.log(res.data)
+      if (res.data.success) {
+          toast.success("Comment Posted.", { "position": "top-left" })
+          setCommentText("");
+          // setCommentcount(res.data.commentcount + 1)
+          getRelease();
+      }
+      else {
+          toast.error("Error while posting.", { "position": "top-left" })
+      }
+
+  })
+
+
 
 }
 
 
+
+
+
   return (
     <>
-  
     <div className="row">
         <div className=" mb-3">
           <div className="p-0">
@@ -91,7 +123,8 @@ const unlikeClick = (feedId) => {
                             <p className="text   mb-0 me-1">
                             {release.user.penname}
                             </p>
-                            <i className="fa fa-check-circle"></i>
+                            {release.user.isPublisher?<i style={{fontSize:'0.7em'}} title='Verified Publisher' className="fa fa-check-circle text-success"></i>:null}
+
                           </div>
                           {/* dropdown */}
                           {(release.user._id == userId) ? (
@@ -159,86 +192,38 @@ const unlikeClick = (feedId) => {
                                 />
                                 <div className=" text-center  py-3">
                                   <p className="text text-dark fw-bold mb-0 fs-6">
+
                                   {release.bookName}
                                   </p>
                                   <p className="text text-secondary mb-0">
                                    {release.bookWriter}
+
                                   </p>
                                 </div>
                               </div>
-                              <div className="p-1 text-center  bg-purple">
-                                <p className="text text-white mb-1 ">
+                              <div className=" text-center  bg-purple">
+                                <p className="text text-white mb-0 fw-light">
                                   Releasing On:
                                 </p>
-                                <p className="text text-white fw-bold fs-5">
+                                <p className="text text-white  fs-5"><i className="fa-regular fa-calendar"></i>&nbsp; 
                                 {dateFormat(release.releasingDate, "dS mmmm , yyyy")}
                                 </p>
                               </div>
                             </div>
                             
                       </div>
-                      <hr />
                       <div className="" style={{ maxWidth: "300px" }}>
                       <p className=" fw-light text-justify" style={{fontSize:"0.9em"}}>
-              
             </p> 
-            
-           
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* for big screen */}
-              <div className="col-md-1 d-none d-sm-none d-md-block bg-white shadow rounded ms-1 pt-2 mb-2">
-                <div className="py-2">
-                {release.Likes.includes(userId) ? (
-                  <div className="justify-content-center align-items-center text-center" style={{ 'cursor': 'pointer' }} onDoubleClick={() => { unlikeClick(release._id) }}>
-                    <i className="fa-solid fa-feather-pointed fs-4 text-danger" type="button"></i>
-                    <p className="text text-secondary">{likecount}</p>
-                  </div>):
-                  <div className="justify-content-center align-items-center text-center" style={{ 'cursor': 'pointer' }} onDoubleClick={() => { likeClick(release._id) }}>
-                  <i className="fa-solid fa-feather-pointed fs-4 " type="button"></i>
-                  <p className="text text-secondary">{likecount}</p>
-                </div>}
-
-                </div>
-                <div className="py-2">
-                  <div className="justify-content-center align-items-center text-center">
-                    <i className="fa fa-comment fs-4" type="button"></i>
-                    <p className="text text-secondary">3</p>
-                  </div>
-                </div>
-                <div className="py-2">
-                  <div className="justify-content-center align-items-center text-center">
-                    <i className="fa fa-share fs-4" type="button"></i>
-                    <p className="text text-secondary">3</p>
-                  </div>
-                </div>
-              </div>
-              {/*  */}
-              {/* for small screen */}
-              <div className="col-md-1 d-block d-sm-block d-md-none bg-white shadow rounded pt-2 d-flex justify-content-between align-items-center">
-                <div className="py-2">
-                  <div className=" d-flex justify-content-center align-items-center text-center">
-                    <i className="fa fa-leaf fs-4 me-2" type="button"></i>
-                    <p className="text text-secondary">3</p>
-                  </div>
-                </div>
-                <div className="py-2">
-                  <div className=" d-flex justify-content-center align-items-center text-center">
-                    <i className="fa fa-comment fs-4 me-2" type="button"></i>
-                    <p className="text text-secondary">3</p>
-                  </div>
-                </div>
-                <div className="py-2">
-                  <div className=" d-flex justify-content-center align-items-center text-center">
-                    <i className="fa fa-share fs-4 me-2" type="button"></i>
-                    <p className="text text-secondary">3</p>
-                  </div>
-                </div>
-              </div>
-              {/*  */}
+              
+     
+                            <LikeCommentShare release={release} likeClick={likeClick} unlikeClick={unlikeClick} userId={userId} likecount={likecount}
+                            commentText={commentText} commentPost={commentPost} setCommentText={setCommentText} />
             </div>
           </div>
         </div>
@@ -250,3 +235,5 @@ const unlikeClick = (feedId) => {
 }
 
 export default SingleRelease;
+
+

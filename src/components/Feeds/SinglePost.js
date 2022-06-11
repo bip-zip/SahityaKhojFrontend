@@ -7,6 +7,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import EditFeed from "./EditFeed";
 import SingleComment from "./SingleComment";
+import CommentFeed from "./CommentFeed";
+import ShareFeed from "./ShareFeed";
 
 
 function SinglePost({ feed, getFeeds, comments }) {
@@ -127,7 +129,8 @@ function SinglePost({ feed, getFeeds, comments }) {
                             <p className="text   mb-0 me-1">
                             {feed.user.penname}
                             </p>
-                            <i className="fa fa-check-circle"></i>
+                            {feed.user.isWriter?<i style={{fontSize:'0.7em'}} title='Verified Writer' className="fa fa-check-circle text-purple"></i>:null}
+                            {feed.user.isPublisher?<i style={{fontSize:'0.7em'}} title='Verified Publisher' className="fa fa-check-circle text-purple"></i>:null}
                           </div>
                           {/* dropdown */}
                           {(feed.user._id == userId) ? (
@@ -191,7 +194,7 @@ function SinglePost({ feed, getFeeds, comments }) {
               {feed.content.substring(0, 150)}
             </p> : null}
             {
-              show ? <p className="fw-light text-justify">
+              show ? <p className="fw-light text-justify" style={{fontSize:"0.9em"}}>
                 {feed.content}
               </p> : null
             }
@@ -210,26 +213,29 @@ function SinglePost({ feed, getFeeds, comments }) {
                 <div className="py-2">
                 {feed.Likes.includes(userId) ? (
                   <div className="justify-content-center align-items-center text-center" style={{ 'cursor': 'pointer' }} onDoubleClick={() => { unlikeClick(feed._id) }}>
-                    <i className="fa-solid fa-feather-pointed fs-4 text-danger" type="button"></i>
+                    <i className="fa-solid fa-hands-clapping  fs-4 text-warning" type="button"></i>
                     <p className="text text-secondary">{likecount}</p>
                   </div>):
                   <div className="justify-content-center align-items-center text-center" style={{ 'cursor': 'pointer' }} onDoubleClick={() => { likeClick(feed._id) }}>
-                  <i className="fa-solid fa-feather-pointed fs-4 " type="button"></i>
+                  {/* <i className="fa-solid fa-feather-pointed fs-4 " type="button"></i> */}
+                  <i className="fa-solid fa-hands-clapping fs-4 text-muted " type="button"></i>
                   <p className="text text-secondary">{likecount}</p>
                 </div>}
 
                 </div>
                 <div className="py-2">
                   <div className="justify-content-center align-items-center text-center" data-bs-toggle="modal" data-bs-target={"#exampleModal"+feed._id}>
-                    <i className="fa fa-comment fs-4" type="button"></i>
+                    <i className="fa fa-comment-o fs-4 text-muted " type="button"></i>
                     <p className="text text-secondary">{feed.Comments.length}</p>
                   </div>
                 </div>
                 <div className="py-2">
                   <div className="justify-content-center align-items-center text-center">
-                    <i className="fa fa-share fs-4" type="button"></i>
-                    <p className="text text-secondary">3</p>
+                    <i className="fa fa-share-square-o fs-4 text-muted  " data-bs-toggle="modal" data-bs-target={"#exampleModalshare"+feed._id} type="button"></i>
+                    <small className="text text-secondary fw-light" style={{"font-size":'0.7em'}}>Share</small>
                   </div>
+                      
+
                 </div>
               </div>
               {/*  */}
@@ -237,19 +243,19 @@ function SinglePost({ feed, getFeeds, comments }) {
               <div className="col-md-1 d-block d-sm-block d-md-none bg-white shadow rounded pt-2 d-flex justify-content-between align-items-center">
                 <div className="py-2">
                   <div className=" d-flex justify-content-center align-items-center text-center">
-                    <i className="fa fa-leaf fs-4 me-2" type="button"></i>
+                    <i className="fa fa-leaf fs-4 me-2 text-warning " type="button"></i>
                     <p className="text text-secondary">3</p>
                   </div>
                 </div>
                 <div className="py-2">
                   <div className=" d-flex justify-content-center align-items-center text-center">
-                    <i className="fa fa-comment fs-4 me-2" type="button"></i>
+                    <i className="fa fa-comment-o fs-4 me-2 text-muted " type="button"></i>
                     <p className="text text-secondary">3</p>
                   </div>
                 </div>
                 <div className="py-2">
                   <div className=" d-flex justify-content-center align-items-center text-center">
-                    <i className="fa fa-share fs-4 me-2" type="button"></i>
+                    <i className="fa fa-share-square-o fs-4 me-2 text-muted " type="button"></i>
                     <p className="text text-secondary">3</p>
                   </div>
                 </div>
@@ -258,48 +264,14 @@ function SinglePost({ feed, getFeeds, comments }) {
             </div>
           </div>
         </div>
+        <CommentFeed feed={feed} commentText={commentText} commentPost={commentPost} setCommentText={setCommentText}  />
+        <ShareFeed feed={feed}  />
 
       </div>
 
 
 
-<div class="modal fade" id={"exampleModal"+feed._id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i className="fa fa-comments"></i> {feed.Comments.length} Comments </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body bg-light ">
-        {feed.Comments.length>0?<>
-          {feed.Comments.map((comment, index) => (
-                < SingleComment key={index}  comment={comment} />
 
-              ))}
-
-
-
-        
-        
-        
-        </>: <div className="text-center">
-          <img src="/images/ghost.png" className="mb-0" alt="img" height={100} />
-          <p className="text-center p-2" >No comments yet !</p>
-          </div>}
-      </div>
-      <div class="modal-footer">
-        <div className="input-group">
-        <input type="text" className="form-control" placeholder="Post your comment here" value={commentText} onChange={(e)=>{
-          setCommentText(e.target.value)
-        }} />
-        <div className="input-group-append ms-2">
-        <button type="button" class="btn btn-purple text-white " onClick={commentPost}>Post</button>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
     </>
 
