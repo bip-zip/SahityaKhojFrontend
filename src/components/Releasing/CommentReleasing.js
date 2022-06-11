@@ -1,23 +1,18 @@
-import "./feeds.css";
-import dateFormat from 'dateformat';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import SingleComment from "./SingleComment";
+import React from 'react'
 
-function CommentFeed({feed, commentText, commentPost, setCommentText}) {
+function CommentReleasing({release, commentText, commentPost, setCommentText}) {
   return (
     <>
-    <div class="modal fade" id={"exampleModal"+feed._id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id={"exampleModal"+release._id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i className="fa fa-comments"></i> {feed.Comments.length} Comments </h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i className="fa fa-comments"></i> {release.Comments.length} Comments </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body bg-light ">
-        {feed.Comments.length>0?<>
-          {feed.Comments.map((comment, index) => (
+        {release.Comments.length>0?<>
+          {release.Comments.map((comment, index) => (
                 < SingleComment key={index}  comment={comment} />
 
               ))}
@@ -43,8 +38,9 @@ function CommentFeed({feed, commentText, commentPost, setCommentText}) {
     
     
     
+    
     </>
   )
 }
 
-export default CommentFeed
+export default CommentReleasing
