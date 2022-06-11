@@ -1,24 +1,61 @@
-import React from 'react'
+
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import axios from "axios"
 
 function Awards() {
+    const [awards, setAwards]=useState([])
+
+     //  config
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  // Fetch info
+  const fetchInfo = async () => {
+    const res = await axios.get(
+      "http://localhost:8080/api/writers/info",
+      config
+    );
+    return res.data;
+  };
+
+  const getInfo = async () => {
+    const infoFromServer = await fetchInfo();
+
+    setAwards(infoFromServer.data.awards);
+  };
+
+  // useeffect call
+  useEffect(() => {
+    getInfo();
+  }, []);
+
     return (
-        <>
-            <div class="accordion mb-3" id="accordionExample">
+<>
+        {awards.map((award, index) => (
+            
+            <div class="accordion mb-3" id={"accordionExample" + award._id}>
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Madan Puraskar 2022
+                    <h2 class="accordion-header" id={"headingOne"+index}>
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={"#collapseOne"+index} aria-expanded="true" aria-controls="collapseOne">
+                        <i className="fa-solid fa-award fs-4 text-warning"></i> &nbsp; {award.awardName} {award.date}
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <div id={"collapseOne"+index} class="accordion-collapse collapse show" aria-labelledby={"headingOne"+index} data-bs-parent={"#accordionExample" + award._id}>
+                        <div class="accordion-body fw-light">
+                            {award.description}
                         </div>
                     </div>
                 </div>
                 
             </div>
-        </>
+
+          ))}
+           </>
+       
     )
 }
 

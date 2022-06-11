@@ -159,10 +159,10 @@ const unlikeClick = (feedId) => {
                                 />
                                 <div className=" text-center  py-3">
                                   <p className="text text-dark fw-bold mb-0 fs-6">
-                                    Book Title
+                                  {release.bookName}
                                   </p>
                                   <p className="text text-secondary mb-0">
-                                    Bhakat bahadur Thapa
+                                   {release.bookWriter}
                                   </p>
                                 </div>
                               </div>
