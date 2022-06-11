@@ -192,10 +192,12 @@ const commentPost = (e) => {
                                 />
                                 <div className=" text-center  py-3">
                                   <p className="text text-dark fw-bold mb-0 fs-6">
-                              {release.bookName}
+
+                                  {release.bookName}
                                   </p>
                                   <p className="text text-secondary mb-0">
-                                  {release.bookWriter}
+                                   {release.bookWriter}
+
                                   </p>
                                 </div>
                               </div>

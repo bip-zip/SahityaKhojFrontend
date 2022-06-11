@@ -1,7 +1,6 @@
 import SinglePost from "../Feeds/SinglePost";
 import Awards from "./Awards";
 import BooksAwards from "./BooksAwards";
-import Posts from "./Posts";
 import dateFormat from 'dateformat';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -133,7 +132,8 @@ function Portfolio() {
                     style={{ width: "100%", height: "1px" }}
                   ></p>
                 </div>
-                    <p>Awards content</p>
+                    <Awards/>
+                   
              
                   </div>
                   </>
@@ -141,7 +141,7 @@ function Portfolio() {
               </div>
             </div>
             <div className="col px-0   "  >
-              <div className="py-1 my-2  px-5 ms-2 me-0 bg-white position-fixed " style={{width:'27.5%'}}>
+              <div className="py-1 my-2  px-5 ms-2 me-0 bg-white " style={{position:'sticky', top:'6em'}}>
                 <p className="h4 px-2 pt-2 mb-0 pb-0 text-center">
                   Writer's info
                 </p>
