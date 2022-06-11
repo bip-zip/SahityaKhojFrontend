@@ -104,7 +104,7 @@ function AdminNavbar() {
               </ul>
             </li>
             <li>
-              <Link to="#" className="nav-link px-0 align-middle">
+              <Link to="/admin/ads" className="nav-link px-0 align-middle">
                 <i className="fs-4 bi-people" />{" "}
                 <span className="ms-1 d-none d-sm-inline">Ads</span>{" "}
               </Link>

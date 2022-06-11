@@ -39,10 +39,14 @@ function Profile() {
       return res.data
     }
     // Fetch info
-    const fetchInfo = async () => {
-      const res = await axios.get('http://localhost:8080/api/users/info',config)
-      return res.data
-    }
+    // getting previous info
+const fetchInfo = async () => {
+  const res = await axios.get(
+    "http://localhost:8080/api/users/user-info",
+    config
+  );
+  return res.data;
+};
 
   return (
     <>
@@ -71,7 +75,8 @@ function Profile() {
               </div>
             </div>
             <div className="col px-0   "  >
-              <div className="py-1 my-2  px-5 ms-2 me-0 bg-white position-fixed " style={{width:'27.5%'}}>
+              <div className="py-1 my-2  px-5 ms-2 me-0 bg-white order-md-1 " style={{position:'sticky', top:'6em'}}>
+              {/* <div className="py-1 my-2  px-5 ms-2 me-0 bg-white position-fixed " style={{width:'27.5%'}}> */}
                 <p className="h4 px-2 pt-2 mb-0 pb-0 text-center">
                   User's info 
                 </p>
@@ -108,27 +113,30 @@ function Profile() {
                   </div>
                   
                 </div>
+                <Link  to="/edit-profile" className="my-1 text-decoration-none d-flex justify-content-center"> <span class="badge bg-danger"><i className="fa fa-camera"></i> Edit profile</span></Link>
+
 
                 <p className="text text-danger h5 text-center py-2">
                   {info.penname}
                 </p>
                 <p className="text text-secondary h6 text-center">
-                  First name: 
+                  First name: {info.firstname}
                 </p>
                 <p className="text text-secondary h6 text-center">
-                  Last name: 
+                  Last name: {info.lastname}
                 </p>
                 <p className="text text-secondary h6 text-center">
                   Email: {info.email}
                 </p>
                 <p className="text text-secondary h6 text-center">
                   Contact: {info.contact}
+                </p><hr/>
+               
+                <p className='p-2 text-center border rounded-3'>{info.bio}
+
                 </p>
                 
-                <div className="d-flex justify-content-center align-items-center mt-3 py-2">
-                <button className='btn btn-sm btn-outline-danger'>edit</button>
-
-                </div>
+               
               </div>
             </div>
           </div>

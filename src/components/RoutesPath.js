@@ -1,6 +1,7 @@
 import React from 'react'
 import {Routes, Route} from 'react-router-dom'
 import AdminDashboard from './Admin/AdminDashboard'
+import AdsRow from './Admin/AdsStuff/AdsRow'
 import AdminPublication from './Admin/PublicationStuff/AdminPublication'
 import AdminWriter from './Admin/WriterStuff/AdminWriter'
 import RequestAd from './Ads/RequestAd'
@@ -15,6 +16,7 @@ import FrontPage from './Frontpage/FrontPage'
 import Results from './Frontpage/Results'
 import Portfolio from './Portfolio/Portfolio'
 import UpdatePortfolio from './Portfolio/UpdatePortfolio'
+import EditProfile from './Profile/EditProfile'
 import Profile from './Profile/Profile'
 import AddBook from './Publication/AddBook'
 import AddedBooks from './Publication/AddedBooks'
@@ -22,6 +24,7 @@ import AllBooks from './Publication/AllBooks'
 import PublicationPortfolio from './Publication/PublicationPortfolio'
 import AddReleasing from './Releasing/AddReleasing'
 import ReleaseHome from './Releasing/ReleaseHome'
+
 
 
 function RoutesPath() {
@@ -47,6 +50,7 @@ function RoutesPath() {
             <Route path="/update-portfolio" element={<UpdatePortfolio/>} ></Route>
             <Route path="/add-releasing" element={<AddReleasing/>} ></Route>
             <Route path="/request-ads" element={<RequestAd/>} ></Route>
+            <Route path="/edit-profile" element={<EditProfile/>} ></Route>
 
 
            {localStorage.getItem('isAdmin')? 
@@ -68,6 +72,7 @@ function RoutesPath() {
            }
             <Route path="/admin/publications" element={<AdminPublication/>} ></Route>
             <Route path="/admin/writers" element={<AdminWriter/>} ></Route>
+            <Route path="/admin/ads" element={<AdsRow/>} ></Route>
         </Routes>
 
 

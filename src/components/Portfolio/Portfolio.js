@@ -7,6 +7,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import ProfileAddedBook from "../Publication/ProfileAddedBook";
 
 function Portfolio() {
   const [awardDiv, setAwardDiv] = useState(true);
@@ -58,8 +59,11 @@ function Portfolio() {
                   {awardDiv ? (
                     <div className="p-2">
                       <h4>Books & awards</h4>
+                      
                       <hr />
+                      
                     </div>
+                    
                   ) : null}
                   {feedsDiv ? (
                     <div className="p-2">
@@ -108,15 +112,15 @@ function Portfolio() {
                 ) : null}
                 {awardDiv ? (
                   <>
-                  <div className="row p-2">
+                
                     
                     
-                    <p>bookawards content</p>
+                  <ProfileAddedBook/>
 
              
                     
                 
-                  </div>
+              
                   <div className="p-3">
                   <div className="d-flex align-items-center  mb-3">
                   <p
