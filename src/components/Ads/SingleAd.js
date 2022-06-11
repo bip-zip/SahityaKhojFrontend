@@ -45,4 +45,5 @@ function SingleAd() {
     )
 }
 
+
 export default SingleAd

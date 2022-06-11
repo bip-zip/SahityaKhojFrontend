@@ -1,10 +1,11 @@
+
 import dateFormat from 'dateformat';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import toast from 'react-hot-toast';
-import EditFeed from "../Feeds/EditFeed";
+// import EditFeed from "../Feeds/EditFeed";
 import LikeCommentShare from './LikeCommentShare';
 
 function SingleRelease({release,getRelease}) {
@@ -232,3 +233,5 @@ const commentPost = (e) => {
 }
 
 export default SingleRelease;
+
+
