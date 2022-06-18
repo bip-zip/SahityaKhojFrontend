@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 
 import axios from "axios";
 import { useState } from 'react';
+import LoginGoogle from './LoginGoogle';
 
 
 function Login() {
@@ -123,6 +124,9 @@ function Login() {
                             <button className='btn btn-danger col-lg-4' onClick={loginUser}>
                                 Login
                             </button>
+                        </div>
+                        <div className='text-center'>
+                            <LoginGoogle/>
                         </div>
                     </form>
                     <div className='mt-2 mb-3 text-center '>
