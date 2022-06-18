@@ -12,6 +12,7 @@ import WriterRequest from './Authentication/WriterRequest'
 import AddFeed from './Feeds/AddFeed'
 import EditFeed from './Feeds/EditFeed'
 import FeedHome from './Feeds/FeedHome'
+import SingleFeedPage from './Feeds/SingleFeed/SingleFeedPage'
 import FrontPage from './Frontpage/FrontPage'
 import Results from './Frontpage/Results'
 import Portfolio from './Portfolio/Portfolio'
@@ -48,7 +49,7 @@ function RoutesPath() {
             <Route path="/update-portfolio" element={<UpdatePortfolio/>} ></Route>
             <Route path="/add-releasing" element={<AddReleasing/>} ></Route>
             <Route path="/request-ads" element={<RequestAd/>} ></Route>
-
+            <Route path="/feed/:feedId" element={<SingleFeedPage/>} ></Route>
 
            {localStorage.getItem('isAdmin')? 
   
