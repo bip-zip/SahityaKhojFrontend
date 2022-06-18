@@ -1,6 +1,10 @@
+
 import React from 'react'
 import CommentFeed from '../Feeds/CommentFeed'
 import ShareReleasing from './ShareReleasing'
+
+
+
 
 function LikeCommentShare({release, likeClick, unlikeClick, likecount, userId, commentPost, commentText, setCommentText}) {
   return (
@@ -22,7 +26,9 @@ function LikeCommentShare({release, likeClick, unlikeClick, likecount, userId, c
                 <div className="py-2">
                   <div className="justify-content-center align-items-center text-center">
                     <i className="fa fa-comment fs-4" type="button" data-bs-toggle="modal" data-bs-target={"#exampleModal"+release._id}></i>
+
                     <p className="text text-secondary">{release.Comments.length}</p>
+
                   </div>
                 </div>
                 <div className="py-2">
@@ -55,12 +61,15 @@ function LikeCommentShare({release, likeClick, unlikeClick, likecount, userId, c
                   </div>
                 </div>
               </div>
+
         <CommentFeed feed={release} commentText={commentText} commentPost={commentPost} setCommentText={setCommentText}  />
         <ShareReleasing release={release}/>
+
 
               {/*  */}
     </>
   )
 }
+
 
 export default LikeCommentShare
