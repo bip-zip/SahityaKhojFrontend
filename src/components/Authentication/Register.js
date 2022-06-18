@@ -23,8 +23,9 @@ function Register() {
         axios.post("http://localhost:8080/api/users/user/registration", userData).then(
             result=>{
                     if(result.data.status){
-                        toast.success("Registration Success!");
-                        navigate('/login')
+                        toast.success("Registration Success. Verify your email.");
+                        localStorage.setItem('email',email)
+                        navigate('/verifytoken')
                     }
                     else{
                         toast.error(result.data.message) 
@@ -117,25 +118,25 @@ function Register() {
                 <div className='col  rounded my-5 '>
                     <h3 className='p-4 fw-lighter text-center '>Register | <span className="fs-4 fw-light " >Sahitya <span className='text-danger'>Khoj</span> <i className="fas fa-feather-alt"></i></span></h3>
                    
-                   <form className='p-4'>
+                   <form className='p-4' id='registerForm'>
                    <div className="form-floating mb-3">
-                        <input type="email"  value={penname} onChange={(e)=>setPenname(e.target.value)} className="form-control" id="floatingInput" placeholder="Your unique id" />
-                        <label for="floatingInput">Penname*</label>
+                        <input type="email"  value={penname} onChange={(e)=>setPenname(e.target.value)} className="form-control" id="penname" placeholder="Your unique id" />
+                        <label for="penname">Penname*</label>
                     </div>
                    <div className="form-floating mb-3">
-                        <input type="email"  value={email} onChange={(e)=>setEmail(e.target.value)} className="form-control" id="floatingeInput" placeholder="name@example.com" />
-                        <label for="floatingInput">Email address*</label>
+                        <input type="email"  value={email} onChange={(e)=>setEmail(e.target.value)} className="form-control" id="email" placeholder="name@example.com" />
+                        <label for="email">Email address*</label>
                     </div>
                     <div className="form-floating mb-3">
-                        <input type="password"  value={password} onChange={(e)=>setPassword(e.target.value)} className="form-control" id="floatingPassword" placeholder="Password" />
+                        <input type="password"  value={password} onChange={(e)=>setPassword(e.target.value)} className="form-control" id="password" placeholder="Password" />
                         <label for="floatingPassword">Password*</label>
                     </div>
                     <div className="form-floating">
-                        <input type="password"  value={cpassword} onChange={(e)=>setCpassword(e.target.value)} className="form-control" id="floatingcPassword" placeholder="Confirm Password" />
-                        <label for="floatingPassword">Confirm Password*</label>
+                        <input type="password"  value={cpassword} onChange={(e)=>setCpassword(e.target.value)} className="form-control" id="cPassword" placeholder="Confirm Password" />
+                        <label for="cPassword">Confirm Password*</label>
                     </div>
                     <div className='mb-2 mt-4 d-flex justify-content-center'>
-                        <button className='btn btn-danger col-lg-4'
+                        <button className='btn btn-danger col-lg-4' id="registerBtn"
                         onClick={registerUser}>
                             Sign Up
                         </button>

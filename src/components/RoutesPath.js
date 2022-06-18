@@ -8,6 +8,7 @@ import RequestAd from './Ads/RequestAd'
 import Login from './Authentication/Login'
 import PublicationRequest from './Authentication/PublicationRequest'
 import Register from './Authentication/Register'
+import VerifyToken from './Authentication/VerifyToken'
 import WriterRequest from './Authentication/WriterRequest'
 import AddFeed from './Feeds/AddFeed'
 import EditFeed from './Feeds/EditFeed'
@@ -24,6 +25,7 @@ import AllBooks from './Publication/AllBooks'
 import PublicationPortfolio from './Publication/PublicationPortfolio'
 import AddReleasing from './Releasing/AddReleasing'
 import ReleaseHome from './Releasing/ReleaseHome'
+
 
 
 
@@ -51,6 +53,7 @@ function RoutesPath() {
             <Route path="/add-releasing" element={<AddReleasing/>} ></Route>
             <Route path="/request-ads" element={<RequestAd/>} ></Route>
             <Route path="/edit-profile" element={<EditProfile/>} ></Route>
+            <Route path="/verifytoken" element={<VerifyToken/>} ></Route>
 
 
            {localStorage.getItem('isAdmin')? 

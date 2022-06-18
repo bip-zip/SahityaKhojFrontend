@@ -4,9 +4,9 @@ import userpic from '../../statics/user.jpg'
 import RecommendCard from './RecommendCard'
 import toast from 'react-hot-toast';
 
-
 import axios from "axios";
 import { useState } from 'react';
+
 
 
 function Login() {
@@ -67,6 +67,8 @@ function Login() {
 
     }
 
+    
+
 
 
     return (
@@ -108,23 +110,27 @@ function Login() {
                 <div className='col  rounded my-5 '>
                     <h3 className='p-4 fw-lighter text-center '>Login | <span className="fs-4 fw-light " >Sahitya <span className='text-danger'>Khoj</span> <i className="fas fa-feather-alt"></i></span></h3>
 
-                    <form className='p-4' method='POST'>
+                    <form className='p-4' method='POST' id='loginForm'>
                         <div className="form-floating mb-3 ">
-                            <input type="text" className="form-control fs-6" id="floatingInput" placeholder="name@example.com" value={penname}
+                            <input type="text" className="form-control fs-6" id="penname" placeholder="name@example.com" value={penname}
                                     onChange={(e)=>setPenname(e.target.value)} />
-                            <label for="floatingInput "><i className='fa fa-user-alt fs-6 '></i>&nbsp; Penname</label>
+                            <label for="penname "><i className='fa fa-user-alt fs-6 '></i>&nbsp; Penname</label>
                         </div>
                         <div className="form-floating">
-                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" value={password}
+                            <input type="password" className="form-control" id="password" placeholder="Password" value={password}
                                     onChange={(e)=>setPassword(e.target.value)} />
-                            <label for="floatingPassword"><i className='fa-solid fa-key fs-6 '></i>&nbsp; Password</label>
+                            <label for="password"><i className='fa-solid fa-key fs-6 '></i>&nbsp; Password</label>
                         </div>
                         <div className='mb-2 mt-4 d-flex justify-content-center'>
-                            <button className='btn btn-danger col-lg-4' onClick={loginUser}>
+                            <button className='btn btn-danger col-lg-4' id='loginBtn' onClick={loginUser}>
                                 Login
                             </button>
                         </div>
+                        <div className='text-center'>
+                   
+                    </div>
                     </form>
+                   
                     <div className='mt-2 mb-3 text-center '>
                         <span>Have not registered? <Link className='text-decoration-none' to='/register'>Register now.</Link></span><br />
                         <Link className='text-decoration-none' to='/register' >Forgot Password?</Link>
