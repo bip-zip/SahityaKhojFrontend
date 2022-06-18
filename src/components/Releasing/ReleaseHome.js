@@ -3,6 +3,7 @@ import SingleRelease from './SingleRelease'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import AdComponent from '../Ads/AdComponent'
+import SingleAd from '../Ads/SingleAd'
 
 
 function ReleaseHome() {
@@ -42,7 +43,7 @@ function ReleaseHome() {
 
       </div>
       <div className='col pe-0 pt-3'>
-        <AdComponent/>
+        <SingleAd/>
    
       
 
