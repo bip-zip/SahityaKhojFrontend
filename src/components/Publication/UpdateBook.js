@@ -1,6 +1,20 @@
 import React from 'react'
 
 function UpdateBook() {
+   
+        const { feedId } = useParams();
+        const navigate = useNavigate();
+        const [title, setTitle] = useState('Title');
+        const [category, setCategory] = useState('category');
+        const [content, setContent] = useState('Content...');
+      
+        const changeCategory = (cat) => {
+          setCategory(cat)
+      }
+    
+      useEffect(()=>{
+          getPosts()
+      },[])
     //   get post
 const getPosts=()=>{
     axios.get("http://localhost:8080/api/update-book" + feedId).then(result => {
