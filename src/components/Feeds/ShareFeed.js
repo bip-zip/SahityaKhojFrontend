@@ -1,6 +1,6 @@
 import React from 'react'
 import toast from 'react-hot-toast';
-import { FacebookShareButton, FacebookIcon } from "react-share";
+// import { FacebookShareButton, FacebookIcon } from "react-share";
 
 
 function ShareFeed({feed}) {
@@ -23,7 +23,7 @@ function ShareFeed({feed}) {
                         <div className="modal-body">
                             <div className='row p-1'>
                                 <div className='col-md-6  text-center '>
-                                    <FacebookShareButton
+                                    {/* <FacebookShareButton
                                         url={"http://www.sahityakhoj.com/feed/"+feed._id}
                                         quote={feed.title + " " + feed.content }
                                         hashtag={"#"+feed.category}
@@ -32,7 +32,7 @@ function ShareFeed({feed}) {
                                         <i className="fa-brands fa-facebook text-primary fs-1"></i>
                                         <p>Facebook</p>
 
-                                    </FacebookShareButton>
+                                    </FacebookShareButton> */}
                                 </div>
                                 {/* <div className='col-md-4  text-center'>
                                     <i className="fa-brands fa-twitter text-info fs-1"></i>

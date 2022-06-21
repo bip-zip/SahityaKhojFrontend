@@ -68,6 +68,23 @@ function SinglePost({ feed, getFeeds, comments }) {
 
   }
 
+  const deleteFeed=(feedId)=>{
+
+    const data = {
+      feedId
+    }
+    axios.put('http://localhost:8080/api/feeds/delete', data, config).then(result => {
+      if (result.data.success) {
+        getFeeds();
+
+      } else {
+        toast.error("Something went wrong")
+
+      }
+    })
+
+  }
+
   const commentPost = (e) => {
     e.preventDefault();
 
@@ -268,10 +285,6 @@ function SinglePost({ feed, getFeeds, comments }) {
         <ShareFeed feed={feed}  />
 
       </div>
-
-
-
-
 
     </>
 
