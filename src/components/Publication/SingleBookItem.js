@@ -1,6 +1,7 @@
 import React from 'react'
 import dateFormat from 'dateformat';
 import BookModal from '../Book/BookModal';
+import { Link } from 'react-router-dom';
 
 function SingleBookItem({book}) {
   return (
@@ -17,7 +18,7 @@ function SingleBookItem({book}) {
                       <td>
                       <button className="btn btn-danger btn-sm my-2">Delete</button>
                       &nbsp; &nbsp;
-                        <button className="btn btn-purple text-white btn-sm my-2">Edit</button>
+                      <Link className="btn btn-purple text-white btn-sm my-2" to={"/edit-book/"+book._id}>Edit</Link>
                         
                         
                       </td>

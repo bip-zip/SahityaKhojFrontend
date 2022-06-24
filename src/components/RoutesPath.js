@@ -20,6 +20,7 @@ import AddBook from './Publication/AddBook'
 import AddedBooks from './Publication/AddedBooks'
 import AllBooks from './Publication/AllBooks'
 import PublicationPortfolio from './Publication/PublicationPortfolio'
+import UpdateBook from './Publication/UpdateBook'
 import AddReleasing from './Releasing/AddReleasing'
 import ReleaseHome from './Releasing/ReleaseHome'
 
@@ -47,6 +48,8 @@ function RoutesPath() {
             <Route path="/update-portfolio" element={<UpdatePortfolio/>} ></Route>
             <Route path="/add-releasing" element={<AddReleasing/>} ></Route>
             <Route path="/request-ads" element={<RequestAd/>} ></Route>
+            
+            <Route path="/edit-book/:bookId" element={<UpdateBook/>} ></Route>
 
 
            {localStorage.getItem('isAdmin')? 
