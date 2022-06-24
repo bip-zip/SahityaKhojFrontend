@@ -11,6 +11,12 @@ import CommentFeed from "./CommentFeed";
 import ShareFeed from "./ShareFeed";
 
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
+
+
+
 function SinglePost({ feed, getFeeds, comments }) {
   const userId = localStorage.getItem('_id')
   let navigate = useNavigate();
@@ -18,6 +24,10 @@ function SinglePost({ feed, getFeeds, comments }) {
   const [ishow, setIshow] = useState(true)
   // const [commentcount, setCommentcount] = useState(0);
   const [commentText, setCommentText] = useState('')
+  const [cindex, setCindex] = useState('')
+  const [commentId, setCommentId] = useState('')
+  const [commentedit, setCommentEdit] = useState(false)
+
 
 
   // const [likes, setLikes] = useState([feed.Likes]);
@@ -68,13 +78,13 @@ function SinglePost({ feed, getFeeds, comments }) {
 
   }
 
-  const deleteFeed=(feedId)=>{
 
-    const data = {
-      feedId
-    }
-    axios.put('http://localhost:8080/api/feeds/delete', data, config).then(result => {
+  // delete post
+  const deleteFeed = (feedId) => {
+    axios.delete('http://localhost:8080/api/feeds/delete/' + feedId, config).then(result => {
       if (result.data.success) {
+        toast.success("Feed deleted")
+
         getFeeds();
 
       } else {
@@ -84,39 +94,70 @@ function SinglePost({ feed, getFeeds, comments }) {
     })
 
   }
+  
+  // delete post
+  const deleteFeedConfirm = (feedId) => {
+    console.log("i am about to delete", feedId)
+    return (
+      confirmAlert({
+        title: 'Confirm',
+        message: 'Are you sure to delete?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => deleteFeed(feedId)
+          },
+          {
+            label: 'No',
+            onClick: () => {}
+          }
+        ]
+      })
+  )
+
+
+  }
+
+
+
+
+
+
+
+
 
   const commentPost = (e) => {
     e.preventDefault();
 
     if (commentText == '') {
-        toast.error("write something..", { "position": "top-left" })
-        return
+      toast.error("write something..", { "position": "top-left" })
+      return
     }
-    
+
     const feedId = feed._id
 
     const data = {
       feedId,
-        commentText
+      commentText
     }
 
     axios.post("http://localhost:8080/api/feeds/comment", data, config).then((res) => {
-        console.log(res.data)
-        if (res.data.success) {
-            toast.success("Comment Posted.", { "position": "top-left" })
-            setCommentText("");
-            // setCommentcount(res.data.commentcount + 1)
-            getFeeds();
-        }
-        else {
-            toast.error("Error while posting.", { "position": "top-left" })
-        }
+      console.log(res.data)
+      if (res.data.success) {
+        toast.success("Comment Posted.", { "position": "top-left" })
+        setCommentText("");
+        // setCommentcount(res.data.commentcount + 1)
+        getFeeds();
+      }
+      else {
+        toast.error("Error while posting.", { "position": "top-left" })
+      }
 
     })
 
 
 
-}
+  }
 
 
   return (
@@ -129,97 +170,125 @@ function SinglePost({ feed, getFeeds, comments }) {
               <div className="col m-0 bg-white rounded shadow-sm me-1 mb-2">
                 <div className="px-4 py-3 m-0">
                   <div className="d-flex justify-content-start align-items-start">
-                    <img
-                       src={"http://localhost:8080/" + feed.user.profilePic}
-                      alt=""
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        objectFit: "cover",
-                        borderRadius: "50%",
-                      }}
-                    />
+                    {feed.user.isWriter ? <Link className="text-decoration-none text-dark" to={"/writer/" + feed.user._id}>
+
+                      <img
+                        src={"http://localhost:8080/" + feed.user.profilePic}
+                        alt=""
+                        style={{
+                          width: "60px",
+                          height: "60px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </Link> : <Link className="text-decoration-none text-dark" to={"/user/" + feed.user._id}>
+
+                      <img
+                        src={"http://localhost:8080/" + feed.user.profilePic}
+                        alt=""
+                        style={{
+                          width: "60px",
+                          height: "60px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </Link>
+
+                    }
+
+
                     <div className="ms-3 w-100">
                       <div className="">
                         <div className="d-flex justify-content-between align-items-center mb-1">
                           <div className="d-flex justify-content-start align-items-center">
-                            <p className="text   mb-0 me-1">
-                            {feed.user.penname}
-                            </p>
-                            {feed.user.isWriter?<i style={{fontSize:'0.7em'}} title='Verified Writer' className="fa fa-check-circle text-purple"></i>:null}
-                            {feed.user.isPublisher?<i style={{fontSize:'0.7em'}} title='Verified Publisher' className="fa fa-check-circle text-purple"></i>:null}
+                            {feed.user.isWriter ? <Link className="text-decoration-none text-dark" to={"/writer/" + feed.user._id}>
+
+                              <p className="text   mb-0 me-1">
+                                {feed.user.penname}
+                              </p>
+                            </Link> : <Link className="text-decoration-none text-dark" to={"/user/" + feed.user._id}>
+
+                              <p className="text   mb-0 me-1">
+                                {feed.user.penname}
+                              </p>
+                            </Link>}
+
+                            {feed.user.isWriter ? <i style={{ fontSize: '0.7em' }} title='Verified Writer' className="fa fa-check-circle text-purple"></i> : null}
+                            {feed.user.isPublisher ? <i style={{ fontSize: '0.7em' }} title='Verified Publisher' className="fa fa-check-circle text-purple"></i> : null}
                           </div>
                           {/* dropdown */}
                           {(feed.user._id == userId) ? (
-                          <div className="dropdown">
-                            <i
-                              className="fa fa-ellipsis-h fs-6 text-secondary"
-                              type="button"
-                              id="dropdownMenuButton1"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            ></i>
-                            {/* list items */}
-                            <ul
-                              className="dropdown-menu"
-                              aria-labelledby="dropdownMenuButton1"
-                            >
-                              <li>
-                                <Link className="dropdown-item fs-6" to={"/edit-feed/"+feed._id}>
-                                  <div className="d-flex justify-content-start align-items-center">
-                                    <i className="fa fa-edit text-secondary me-2"></i>
-                                    <p className="text text-secondary mb-0">
-                                      Edit
-                                    </p>
-                                  </div>
-                                </Link>
-                              </li>
-                              <li>
-                                <button
-                                  className="btn btn-link text-decoration-none dropdown-item fs-6"
-                                  href="#"
-                                >
-                                  <div className="d-flex justify-content-start align-items-center">
-                                    <i className="fa fa-trash-o text-secondary me-2"></i>
-                                    <p className="text text-secondary mb-0">
-                                      Delete
-                                    </p>
-                                  </div>
-                                </button>
-                              </li>
-                            </ul>
-                            {/*  */}
-                          </div>):<></>}
+                            <div className="dropdown">
+                              <i
+                                className="fa fa-ellipsis-h fs-6 text-secondary"
+                                type="button"
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              ></i>
+                              {/* list items */}
+                              <ul
+                                className="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton1"
+                              >
+                                <li>
+                                  <Link className="dropdown-item fs-6" to={"/edit-feed/" + feed._id}>
+                                    <div className="d-flex justify-content-start align-items-center">
+                                      <i className="fa fa-edit text-secondary me-2"></i>
+                                      <p className="text text-secondary mb-0">
+                                        Edit
+                                      </p>
+                                    </div>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <button
+                                    className="btn btn-link text-decoration-none dropdown-item fs-6"
+                                    href="#"
+                                  >
+                                    <div className="d-flex justify-content-start align-items-center" onClick={() => { deleteFeedConfirm(feed._id) }}>
+                                      <i className="fa fa-trash-o text-secondary me-2"></i>
+                                      <p className="text text-secondary mb-0">
+                                        Delete
+                                      </p>
+                                    </div>
+                                  </button>
+                                </li>
+                              </ul>
+                              {/*  */}
+                            </div>) : <></>}
                           {/*  */}
                         </div>
                         <div className="d-flex justify-content-start align-items-center mb-1">
-                          <i className="fa fa-clock me-1 text-secondary" style={{fontSize:"0.7em"}}></i>
-                          <small className="text text-secondary mb-0"style={{fontSize:"0.7em"}} >
-                          {dateFormat(feed.date, "dS mmmm , yyyy")}
+                          <i className="fa fa-clock me-1 text-secondary" style={{ fontSize: "0.7em" }}></i>
+                          <small className="text text-secondary mb-0" style={{ fontSize: "0.7em" }} >
+                            {dateFormat(feed.date, "dS mmmm , yyyy")}
                           </small>
                         </div>
                         <div className="d-flex justify-content-start align-items-center">
                           <i className="fa fa-edit me-1 text-secondary text-bold"></i>
                           <small className="text text-dark mb-0">
-                          {feed.title}
+                            {feed.title}
                           </small>
                         </div>
                       </div>
                       <hr />
                       <div className="" style={{ maxWidth: "300px" }}>
-                      {ishow ? <p className=" fw-light text-justify" style={{fontSize:"0.9em"}}>
-              {feed.content.substring(0, 150)}
-            </p> : null}
-            {
-              show ? <p className="fw-light text-justify" style={{fontSize:"0.9em"}}>
-                {feed.content}
-              </p> : null
-            }
-            {feed.content.length > 150 ? <button
-              className="btn btn-link btn-sm text-decoration-none"
-              onClick={() => setShow(!show) || setIshow(!ishow)}
+                        {ishow ? <p className=" fw-light text-justify" style={{ fontSize: "0.9em" }}>
+                          {feed.content.substring(0, 150)}
+                        </p> : null}
+                        {
+                          show ? <p className="fw-light text-justify" style={{ fontSize: "0.9em" }}>
+                            {feed.content}
+                          </p> : null
+                        }
+                        {feed.content.length > 150 ? <button
+                          className="btn btn-link btn-sm text-decoration-none"
+                          onClick={() => setShow(!show) || setIshow(!ishow)}
 
-            >{!show ? 'Read more...' : 'Show less...'}</button> : null}
+                        >{!show ? 'Read more...' : 'Show less...'}</button> : null}
                       </div>
                     </div>
                   </div>
@@ -228,30 +297,30 @@ function SinglePost({ feed, getFeeds, comments }) {
               {/* for big screen */}
               <div className="col-md-1 d-none d-sm-none d-md-block bg-white shadow rounded ms-1 pt-2 mb-2">
                 <div className="py-2">
-                {feed.Likes.includes(userId) ? (
-                  <div className="justify-content-center align-items-center text-center" style={{ 'cursor': 'pointer' }} onDoubleClick={() => { unlikeClick(feed._id) }}>
-                    <i className="fa-solid fa-hands-clapping  fs-4 text-warning" type="button"></i>
-                    <p className="text text-secondary">{likecount}</p>
-                  </div>):
-                  <div className="justify-content-center align-items-center text-center" style={{ 'cursor': 'pointer' }} onDoubleClick={() => { likeClick(feed._id) }}>
-                  {/* <i className="fa-solid fa-feather-pointed fs-4 " type="button"></i> */}
-                  <i className="fa-solid fa-hands-clapping fs-4 text-muted " type="button"></i>
-                  <p className="text text-secondary">{likecount}</p>
-                </div>}
+                  {feed.Likes.includes(userId) ? (
+                    <div className="justify-content-center align-items-center text-center" style={{ 'cursor': 'pointer' }} onDoubleClick={() => { unlikeClick(feed._id) }}>
+                      <i className="fa-solid fa-hands-clapping  fs-4 text-warning" type="button"></i>
+                      <p className="text text-secondary">{likecount}</p>
+                    </div>) :
+                    <div className="justify-content-center align-items-center text-center" style={{ 'cursor': 'pointer' }} onDoubleClick={() => { likeClick(feed._id) }}>
+                      {/* <i className="fa-solid fa-feather-pointed fs-4 " type="button"></i> */}
+                      <i className="fa-solid fa-hands-clapping fs-4 text-muted " type="button"></i>
+                      <p className="text text-secondary">{likecount}</p>
+                    </div>}
 
                 </div>
                 <div className="py-2">
-                  <div className="justify-content-center align-items-center text-center" data-bs-toggle="modal" data-bs-target={"#exampleModal"+feed._id}>
+                  <div className="justify-content-center align-items-center text-center" data-bs-toggle="modal" data-bs-target={"#exampleModal" + feed._id}>
                     <i className="fa fa-comment-o fs-4 text-muted " type="button"></i>
                     <p className="text text-secondary">{feed.Comments.length}</p>
                   </div>
                 </div>
                 <div className="py-2">
                   <div className="justify-content-center align-items-center text-center">
-                    <i className="fa fa-share-square-o fs-4 text-muted  " data-bs-toggle="modal" data-bs-target={"#exampleModalshare"+feed._id} type="button"></i>
-                    <small className="text text-secondary fw-light" style={{"font-size":'0.7em'}}>Share</small>
+                    <i className="fa fa-share-square-o fs-4 text-muted  " data-bs-toggle="modal" data-bs-target={"#exampleModalshare" + feed._id} type="button"></i>
+                    <small className="text text-secondary fw-light" style={{ "font-size": '0.7em' }}>Share</small>
                   </div>
-                      
+
 
                 </div>
               </div>
@@ -281,10 +350,15 @@ function SinglePost({ feed, getFeeds, comments }) {
             </div>
           </div>
         </div>
-        <CommentFeed feed={feed} commentText={commentText} commentPost={commentPost} setCommentText={setCommentText}  />
-        <ShareFeed feed={feed}  />
+
+        <CommentFeed feed={feed} commentText={commentText} commentPost={commentPost} setCommentText={setCommentText} getFeeds={getFeeds} />
+        <ShareFeed feed={feed} />
 
       </div>
+
+
+
+
 
     </>
 

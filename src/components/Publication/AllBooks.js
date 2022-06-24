@@ -9,11 +9,13 @@ function AllBooks() {
 
   const [books, setBooks] = useState([])
 
+  const getBooks = async () => {
+    const booksFromServer = await fetchBooks()
+    setBooks(booksFromServer.data)
+  }
+
   useEffect(() => {
-    const getBooks = async () => {
-      const booksFromServer = await fetchBooks()
-      setBooks(booksFromServer.data)
-    }
+   
     getBooks()
   }, [])
 
@@ -45,7 +47,7 @@ function AllBooks() {
             <tbody>
 
               {books.map((book, index) => (
-                <SingleBookItem key={index} book={book} />
+                <SingleBookItem key={index} book={book} getBooks={getBooks} />
 
               ))}
 
