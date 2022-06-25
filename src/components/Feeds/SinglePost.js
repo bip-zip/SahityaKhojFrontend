@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import EditFeed from "./EditFeed";
 import SingleComment from "./SingleComment";
 import CommentFeed from "./CommentFeed";
-import ShareFeed from "./ShareFeed";
+// import ShareFeed from "./ShareFeed";
 
 
 function SinglePost({ feed, getFeeds, comments }) {
@@ -303,7 +303,7 @@ function SinglePost({ feed, getFeeds, comments }) {
         </div>
 
         <CommentFeed feed={feed} commentText={commentText} commentPost={commentPost} setCommentText={setCommentText} getFeeds={getFeeds} />
-        <ShareFeed feed={feed} />
+        {/* <ShareFeed feed={feed} /> */}
 
       </div>
 
