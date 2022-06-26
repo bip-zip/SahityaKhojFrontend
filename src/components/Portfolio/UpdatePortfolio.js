@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import AddAward from "./AddAward";
 
 function UpdatePortfolio() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ function UpdatePortfolio() {
   const [education, setEducation] = useState("");
   const [birthplace, setBirthplace] = useState("");
   const [dob, setDob] = useState("");
+  const [awards, setAwards] = useState([]);
 
   const [profilePic, setProfilePic] = useState("");
   // to show choosen and existing pic
@@ -51,6 +53,7 @@ function UpdatePortfolio() {
     setDob(infoFromServer.data.dob);
     setEmail(infoFromServer.data.email);
     setEducation(infoFromServer.data.education);
+    setAwards(infoFromServer.data.awards);
   };
 
   // useeffect call
@@ -267,15 +270,21 @@ function UpdatePortfolio() {
             </div>
           </div>
         </div>
-        <div className="p-3 mb-2 bg-white">
+        {/* <div className="p-3 mb-2 bg-white">
           <h5 className="">Published Books</h5>
 
           <div className="mt-2 mx-5 shadow-sm"></div>
-        </div>
+        </div> */}
         <div className="p-3 mb-2 bg-white">
-          <h5 className="">Awards</h5>
+          <h5 className="">Awards</h5><hr/>
 
-          <div className="mt-2 mx-5 shadow-sm"></div>
+          <div className="mt-2 mx-5 p-3 shadow-sm">
+            <AddAward getInfo={getInfo} awards={awards}/>
+          
+
+           
+
+          </div>
         </div>
       </div>
     </>

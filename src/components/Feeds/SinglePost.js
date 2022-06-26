@@ -1,3 +1,4 @@
+
 import "./feeds.css";
 import dateFormat from 'dateformat';
 import axios from 'axios';
@@ -317,3 +318,4 @@ function SinglePost({ feed, getFeeds, comments }) {
 }
 
 export default SinglePost;
+

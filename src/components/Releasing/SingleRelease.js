@@ -4,7 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import toast from 'react-hot-toast';
+
 import EditFeed from "../Feeds/EditFeed";
+
 import LikeCommentShare from './LikeCommentShare';
 
 function SingleRelease({release,getRelease}) {
@@ -191,10 +193,12 @@ const commentPost = (e) => {
                                 />
                                 <div className=" text-center  py-3">
                                   <p className="text text-dark fw-bold mb-0 fs-6">
+
                               {release.bookName}
                                   </p>
                                   <p className="text text-secondary mb-0">
                                   {release.bookWriter}
+
                                   </p>
                                 </div>
                               </div>
@@ -232,3 +236,5 @@ const commentPost = (e) => {
 }
 
 export default SingleRelease;
+
+

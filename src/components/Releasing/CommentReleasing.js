@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 function CommentReleasing({release, commentText, commentPost, setCommentText}) {
@@ -42,5 +43,6 @@ function CommentReleasing({release, commentText, commentPost, setCommentText}) {
     </>
   )
 }
+
 
 export default CommentReleasing
