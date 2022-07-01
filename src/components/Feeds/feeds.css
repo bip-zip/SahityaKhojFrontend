@@ -110,3 +110,15 @@
   box-shadow: none;
   outline: 0 none;
 }
+
+
+.on {
+  color: orange;
+/*  color: orange; */
+
+}
+.off {
+  color: #ccc;
+/*  color: #ccc; */
+}
+

@@ -143,7 +143,7 @@ function Register() {
                    </form>
                    <div className='mt-2 mb-3 text-center '>
                        <span>Already registered? <Link className='text-decoration-none' to='/register'>Login here.</Link></span><br/>
-                       <Link className='text-decoration-none' to='/register' >Need help?</Link>
+                       <Link className='text-decoration-none' to='/help' >Need help?</Link>
                    </div>
 
                 </div>

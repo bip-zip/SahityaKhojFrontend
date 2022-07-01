@@ -8,11 +8,13 @@ import Login from './Authentication/Login'
 import PublicationRequest from './Authentication/PublicationRequest'
 import Register from './Authentication/Register'
 import WriterRequest from './Authentication/WriterRequest'
+import SingleBookPage from './Book/SingleBookPage'
 import AddFeed from './Feeds/AddFeed'
 import EditFeed from './Feeds/EditFeed'
 import FeedHome from './Feeds/FeedHome'
 import FrontPage from './Frontpage/FrontPage'
 import Results from './Frontpage/Results'
+import HelpPage from './HelpPage'
 import Portfolio from './Portfolio/Portfolio'
 import UpdatePortfolio from './Portfolio/UpdatePortfolio'
 import Profile from './Profile/Profile'
@@ -50,8 +52,11 @@ function RoutesPath() {
             <Route path="/request-ads" element={<RequestAd/>} ></Route>
             
             <Route path="/edit-book/:bookId" element={<UpdateBook/>} ></Route>
-
-
+            <Route path="/help" element={<HelpPage />} ></Route>
+            <Route path="/book/:bookId" element={<SingleBookPage />} ></Route>
+            
+            
+            
            {localStorage.getItem('isAdmin')? 
   
            <Route path="/admin" element={<AdminDashboard/>} ></Route>:
