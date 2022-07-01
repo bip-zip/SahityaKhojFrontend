@@ -29,36 +29,7 @@ function BookRecommendation() {
   return (
 
     
-    <>
-    {books?<div className="container col-md-11 bg-white mb-3 p-4">
-          <div className="d-flex justify-content-between align-items-center mb-0">
-            <p className="text text-purple mb-0">You may be interested in</p>
-            
-          </div>
-          <hr
-            className="bg-purple mt-1"
-            style={{ width: "100%", height: "2px" }}
-          />
-          <div className="row">
-          {books.map((book, index) => (
-           <a className="col mb-3 p-0 me-1" href={"/book/"+book._id}>
-           <div >
-              <div className="p-0">
-                <img
-                  src={"http://localhost:8080/"+book.bookCover}
-                  alt=""
-                  style={{ width: "100%", height: "auto" }}
-                />
-              </div>
-            </div>
-           </a>
-             ))}
-           
-           
-          </div>
-         
-        </div>:<p>Fetching data</p>}
-    </>
+
   )
 }
 
