@@ -23,10 +23,24 @@ function StarRating({bookId}) {
 
 
 
- 
+        axios
+            .post("http://localhost:8080/api/ratings/rate", data, config)
+            .then((result) => {
+                console.log(result);
+                if (result.data.success) {
+                    toast.success(result.data.message);
+            
+                } else {
+                    toast.error("Something went wrong");
+                }
+            })
+            .catch((e) => {
+                toast.error("Something went wrong!!");
+            });
+
     }
 
- 
+  
 
 
 
