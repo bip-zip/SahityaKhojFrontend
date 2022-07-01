@@ -34,7 +34,33 @@ function CommentOnBook({ bookId }) {
     }
 
     // posting review
-   
+    const postReview=(e)=>{
+        e.preventDefault();
+        const data={
+            "bookId":bookId,
+            'comment':comment,
+            "name":name
+        }
+        if (name== "" || comment == ''){
+            toast.error("Fill out name and comment both.")
+        }
+        else{
+            axios.post("http://localhost:8080/api/book-review/post",data, config).then(res=>{
+                if(res){
+                    getReviews()
+                    toast.success(res.data.message)
+                    setComment('')
+                    setName('')
+                }else{
+            toast.error(res.data.message)
+
+                }
+
+            })
+        }
+
+    }
+
 
     return (
         <>
