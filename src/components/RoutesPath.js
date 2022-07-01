@@ -6,6 +6,8 @@ import AdminPublication from './Admin/PublicationStuff/AdminPublication'
 import AdminWriter from './Admin/WriterStuff/AdminWriter'
 import RequestAd from './Ads/RequestAd'
 import Login from './Authentication/Login'
+import ForgetPassword from './Authentication/ForgetPassword'
+import SetNewPassword from './Authentication/SetNewPassword'
 import PublicationRequest from './Authentication/PublicationRequest'
 import Register from './Authentication/Register'
 import VerifyToken from './Authentication/VerifyToken'
@@ -25,6 +27,7 @@ import AllBooks from './Publication/AllBooks'
 import PublicationPortfolio from './Publication/PublicationPortfolio'
 import AddReleasing from './Releasing/AddReleasing'
 import ReleaseHome from './Releasing/ReleaseHome'
+
 
 
 
@@ -54,6 +57,9 @@ function RoutesPath() {
             <Route path="/request-ads" element={<RequestAd/>} ></Route>
             <Route path="/edit-profile" element={<EditProfile/>} ></Route>
             <Route path="/verifytoken" element={<VerifyToken/>} ></Route>
+            <Route path="/forget-password" element={<ForgetPassword />} ></Route>
+
+<Route path="/reset-password/:userId/:token" element={<SetNewPassword />} ></Route>
 
 
            {localStorage.getItem('isAdmin')? 

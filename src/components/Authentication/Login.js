@@ -133,7 +133,7 @@ function Login() {
                    
                     <div className='mt-2 mb-3 text-center '>
                         <span>Have not registered? <Link className='text-decoration-none' to='/register'>Register now.</Link></span><br />
-                        <Link className='text-decoration-none' to='/register' >Forgot Password?</Link>
+                        <Link className='text-decoration-none' to='/forget-password' >Forgot Password?</Link>
                     </div>
 
                 </div>
