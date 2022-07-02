@@ -9,6 +9,7 @@ import Login from './Authentication/Login'
 import PublicationRequest from './Authentication/PublicationRequest'
 import Register from './Authentication/Register'
 import WriterRequest from './Authentication/WriterRequest'
+import SingleBookPage from './Book/SingleBookPage'
 import AddFeed from './Feeds/AddFeed'
 import EditFeed from './Feeds/EditFeed'
 import FeedHome from './Feeds/FeedHome'
@@ -50,12 +51,12 @@ function RoutesPath() {
             <Route path="/add-releasing" element={<AddReleasing/>} ></Route>
             <Route path="/request-ads" element={<RequestAd/>} ></Route>
             <Route path="/feed/:feedId" element={<SingleFeedPage/>} ></Route>
-
+            <Route path="/book/:bookId" element={<SingleBookPage />} ></Route>
            {localStorage.getItem('isAdmin')? 
   
            <Route path="/admin" element={<AdminDashboard/>} ></Route>:
            <Route path="/" element={<FrontPage/>} ></Route>
-
+            
 
            
            }

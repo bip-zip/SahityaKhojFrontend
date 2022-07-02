@@ -1,5 +1,6 @@
 import React from 'react'
 import dateFormat from 'dateformat';
+import { Link } from 'react-router-dom';
 
 
 function BookModal({ book }) {
@@ -19,6 +20,7 @@ function BookModal({ book }) {
                             </div>
                             <hr/>
                             <p className='h6'>Category: {book.category}</p>
+                        {book.verifiedPublication ?<p className='h6'>Publisher: {book.verifiedPublication.name}</p>:null}
                             <p className='h6'>ISBN: {book.isbn}</p>
                             
                             <p className='h6'>Published Date: {dateFormat(book.publishedDate,"dS mmmm , yyyy")}</p>
@@ -32,7 +34,7 @@ function BookModal({ book }) {
 
                         </div>
                         <div className="modal-footer">
-                            <p className='bg-danger px-2 py-1 text-white rounded-3'>Rs. {book.price}</p>
+                            <a className='btn btn-sm btn-outline-primary '  href={'/book/'+book._id} >More Details </a>
 
                         </div>
                     </div>
