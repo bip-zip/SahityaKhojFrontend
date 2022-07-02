@@ -27,25 +27,47 @@ export default function Navbar() {
             <>
                 <ul className="navbar-nav ms-auto">
 
-                   
+
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className='fa fa-user-circle'></i>    {localStorage.getItem("penname")}
+                            <i className='fa fa-user-circle'></i>    {localStorage.getItem("penname")}
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {localStorage.getItem("isWriter")  ?
+                                <>
+                                    <li><Link className="dropdown-item" to="/portfolio">Portfolio</Link></li>
+                                    <li><Link className="dropdown-item" to="/add-feed">Add post</Link></li>
+                                    <li><div className="dropdown-item" onClick={userLogout} >Logout</div></li>
+                                </> : <></>
+
+                            }
+                            {localStorage.getItem("isPublisher")  ?
+                                <>
+                                    <li><Link className="dropdown-item" to="/publication">Publication Portfolio</Link></li>
+                                    <li><Link className="dropdown-item" to="/add-books">Add book</Link></li>
+                                    <li><Link className="dropdown-item" to="/added-books">Added books</Link></li>
+                                    <li><Link className="dropdown-item" to="/all-books">All books</Link></li>
+                                    <li><Link className="dropdown-item" to="/add-feed">Add post</Link></li>
+                                    <li><Link className="dropdown-item" to="/add-releasing">Add releasing</Link></li>
+                                    <li><Link className="dropdown-item" to="/request-ads">Request Ads</Link></li>
+                                    <hr />
+
+
+                                    <li><div className="dropdown-item" onClick={userLogout} >Logout</div></li>
+                                </> : <></>
+
+                            }
+
+                            {!localStorage.getItem('isWriter') && !localStorage.getItem('isPublisher') ?
+                            <>
                             <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
-                            <li><Link className="dropdown-item" to="/portfolio">Portfolio</Link></li>
-                            <li><Link className="dropdown-item" to="/publication">Publication Portfolio</Link></li>
                             <li><Link className="dropdown-item" to="/writer-request">Request writer</Link></li>
-                            <li><Link className="dropdown-item" to="/add-books">Add book</Link></li>
-                            <li><Link className="dropdown-item" to="/added-books">Added books</Link></li>
-                            <li><Link className="dropdown-item" to="/all-books">All books</Link></li>
-                            <hr/>
-                            <li><Link className="dropdown-item" to="/add-releasing">Add releasing</Link></li>
-                            
                             <li><Link className="dropdown-item" to="/add-feed">Add post</Link></li>
-                            <li><Link className="dropdown-item" to="/request-ads">Request Ads</Link></li>
+                            <hr />
+
                             <li><div className="dropdown-item" onClick={userLogout} >Logout</div></li>
+                            </>:<></>
+                            }
 
                         </ul>
                     </li>
@@ -54,7 +76,7 @@ export default function Navbar() {
             </>
         )
     } else {
-         menu = (
+        menu = (
             <>
                 <ul className="navbar-nav ms-auto">
 
@@ -65,7 +87,7 @@ export default function Navbar() {
                         <NavLink exact activeClassName="active" className="nav-link" to="/register">Sign up</NavLink>
 
                     </li>
-                    
+
                 </ul>
 
             </>

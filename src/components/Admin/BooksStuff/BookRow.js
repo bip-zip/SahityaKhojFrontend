@@ -7,7 +7,7 @@ function BookRow({book, getBooks }) {
    
       <tr className=" rounded my-3">
       <td>{book.bookName}</td>
-      <td>{book.requestedBy}</td>
+      {book.requestedBy?<td>{book.requestedBy.penname}</td>:<td>No value</td>}
       <td>{book.requestedDate}</td>
       {book.approved?<td><i className='fa fa-circle-check text-success'></i></td>:<td><i className='fa fa-circle-xmark text-danger'></i></td>}
 
