@@ -27,6 +27,8 @@ import AllBooks from './Publication/AllBooks'
 import PublicationPortfolio from './Publication/PublicationPortfolio'
 import AddReleasing from './Releasing/AddReleasing'
 import ReleaseHome from './Releasing/ReleaseHome'
+import UpdatePublicationPortfolio from './Publication/UpdatePublicationPortfolio'
+
 
 
 
@@ -58,6 +60,7 @@ function RoutesPath() {
             <Route path="/edit-profile" element={<EditProfile/>} ></Route>
             <Route path="/verifytoken" element={<VerifyToken/>} ></Route>
             <Route path="/forget-password" element={<ForgetPassword />} ></Route>
+            <Route path="/update-publication-portfolio" element={<UpdatePublicationPortfolio />} ></Route>
 
 <Route path="/reset-password/:userId/:token" element={<SetNewPassword />} ></Route>
 

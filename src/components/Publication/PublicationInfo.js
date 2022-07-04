@@ -1,6 +1,29 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function PublicationInfo() {
+function PublicationInfo({pubId}) {
+
+const[info, setInfo] = useState([])
+
+// Fetch Infos
+const fetchinfo = async () => {
+  const res = await axios.get('http://localhost:8080/api/publications/information/'+ pubId)
+  return res.data
+}
+
+const getInfo = async () => {
+  const InfoFromServer = await fetchinfo()
+  setInfo(InfoFromServer.data)
+}
+useEffect(() => {
+      
+  getInfo()
+
+}, [])
+
+
+
   return (
     <div className="py-1 my-2  px-5 ms-2 me-0 bg-white position-fixed " style={{width:'27.5%'}}>
     <p className="h4 px-2 pt-2 mb-0 pb-0 text-center">
@@ -12,7 +35,7 @@ function PublicationInfo() {
       style={{ position: "relative" }}
     >
       <img
-        src="/images/logooriental.jpg"
+        src={"http://localhost:8080/" + info.logo}
         className=""
         alt=""
         style={{
@@ -37,22 +60,22 @@ function PublicationInfo() {
           }}
         />
       </div>
+
     </div>
+                <Link  to="/update-publication-portfolio" className="my-1 text-decoration-none d-flex justify-content-center"> <span class="badge bg-danger"><i className="fa fa-camera"></i> Update </span></Link>
     <p className="text text-danger h5 text-center py-2">
-      Oriental Publication House
+      {info.name}
     </p>
     <p className="text text-secondary h6 text-center">
-      Email: oriental.publi@gmail.com
+      Email: {info.email}
     </p>
     <p className="text text-secondary h6 text-center">
-      Contact: 01-4535232
+      Contact: {info.contact}
     </p>
     <p className="text text-secondary h6 text-center">
-      Address: Bagbazar
+      Address: {info.address}
     </p>
-    <p className="text text-secondary h6 text-center">
-      CEO: Hari Gautam
-    </p>
+    
     <div className="d-flex justify-content-center align-items-center mt-3 py-2">
       <button className="btn btn-purple px-3 btn-sm text-white"> <i className="fa fa-eye me-2"></i> 100 profile visits</button>
     </div>
